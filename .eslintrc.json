@@ -37,6 +37,7 @@
     "nonblock-statement-body-position": "off",
     "react/jsx-one-expression-per-line": "off",
     "import/no-extraneous-dependencies": "off",
-    "react/jsx-no-useless-fragment": "off"
+    "react/jsx-no-useless-fragment": "off",
+    "react/jsx-props-no-spreading": "off"
   }
 }
