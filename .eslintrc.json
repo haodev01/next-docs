@@ -19,7 +19,7 @@
     "react/button-has-type": "off",
     "react/react-in-jsx-scope": "off",
     "react/jsx-filename-extension": "off",
-    "import/prefer-default-export": "warn",
+    "import/prefer-default-export": "off",
     "semi": 0,
     "react/function-component-definition": "off",
     "indent": "off",
@@ -36,6 +36,7 @@
     "react/require-default-props": "off", // let it handle by TypeScript
     "nonblock-statement-body-position": "off",
     "react/jsx-one-expression-per-line": "off",
-    "import/no-extraneous-dependencies": "off"
+    "import/no-extraneous-dependencies": "off",
+    "react/jsx-no-useless-fragment": "off"
   }
 }
