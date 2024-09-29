@@ -35,6 +35,7 @@
     "implicit-arrow-linebreak": "off",
     "react/require-default-props": "off", // let it handle by TypeScript
     "nonblock-statement-body-position": "off",
-    "react/jsx-one-expression-per-line": "off"
+    "react/jsx-one-expression-per-line": "off",
+    "import/no-extraneous-dependencies": "off"
   }
 }
