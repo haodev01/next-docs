@@ -1,6 +1,6 @@
 'use client';
 
-import { BlogItem } from '@/components/common';
+import { BlogItem } from '@/components/common/blog';
 
 export default function Home() {
   return (
