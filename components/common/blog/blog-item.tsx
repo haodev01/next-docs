@@ -7,7 +7,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 export const BlogItem = () => {
   return (
-    <div className="blog-item border rounded-lg">
+    <div className="border rounded-lg">
       <Link href="/" className="image">
         <Image
           src={Images.blog}
