@@ -28,11 +28,15 @@ request.interceptors.response.use(
   },
 );
 
+type Response<T> = {
+  data: T;
+  status: number;
+};
 const http = {
-  post: async (url: string, data = {}, conf = {}) => {
+  post: async <T>(url: string, data = {}, conf = {}): Promise<Response<T>> => {
     return request.post(url, data, conf);
   },
-  get: async (url: string, params = {}, conf = {}) => {
+  get: async <T>(url: string, params = {}, conf = {}): Promise<Response<T>> => {
     return request.get(url, {
       params,
       ...conf,
