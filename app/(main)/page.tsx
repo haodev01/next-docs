@@ -1,14 +1,22 @@
-import BlogItem from '@/components/common/blog/blog-item';
+import { Suspense } from 'react';
+import { categoryApi } from '@/api';
+import { ProductList } from './_components/product-list';
+import { ProductListLoading } from './_components/product-list-loading';
 
-export default function Home() {
+const getCategories = async () => {
+  const ressponse = await categoryApi.list();
+  return ressponse;
+};
+export default async function Home() {
+  const categories = await getCategories();
+
   return (
-    <div className="container mx-auto">
-      <div className="grid grid-cols-2 gap-6">
-        <BlogItem />
-        <BlogItem />
-        <BlogItem />
-        <BlogItem />
-      </div>
-    </div>
+    <>
+      {categories.map((category: string) => (
+        <Suspense key={category} fallback={<ProductListLoading />}>
+          <ProductList category={category} />
+        </Suspense>
+      ))}
+    </>
   );
 }

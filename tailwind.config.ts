@@ -1,5 +1,5 @@
-import type { Config } from 'tailwindcss';
 import tailwindAnimation from 'tailwindcss-animate';
+import type { Config } from 'tailwindcss';
 
 const config: Config = {
   darkMode: ['class'],
@@ -8,8 +8,12 @@ const config: Config = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+
   theme: {
     extend: {
+      container: {
+        padding: '1rem',
+      },
       colors: {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
