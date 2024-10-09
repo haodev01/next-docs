@@ -1,11 +1,8 @@
-'use client';
-
 import { ToggleMode } from '@/components/common';
 import { User } from '@/types';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { signOut } from 'next-auth/react';
-import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
+import { UserDropdown } from './user-dropdown';
 
 interface IHeaderProps {
   user?: User;
@@ -20,18 +17,16 @@ export const Header = (props: IHeaderProps) => {
             <Link href="/">Husky</Link>
           </h1>
           <div className="flex items-center gap-x-10">
-            <div>
-              <Link href="/loading-streaming">Loading Streaming</Link>
+            <div className="flex items-center gap-x-6">
+              <Link className="hover:text-primary" href="/loading-streaming">
+                Loading Streaming
+              </Link>
+              <Link className="hover:text-primary" href="/product">
+                Products
+              </Link>
             </div>
             {user?.id ? (
-              <Avatar
-                onClick={() => {
-                  signOut();
-                }}
-              >
-                <AvatarImage src="https://github.com/shadcn.png" />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
+              <UserDropdown />
             ) : (
               <Button asChild>
                 <Link href="/signin">Signin</Link>
