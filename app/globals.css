@@ -67,3 +67,16 @@
     @apply bg-background text-foreground;
   }
 }
+
+.unblur {
+  animation: unblur 0.2s ease-in;
+}
+
+@keyframes unblur {
+  from {
+    filter: blur(10px);
+  }
+  to {
+    filter: blur(0);
+  }
+}

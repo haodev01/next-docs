@@ -1,19 +1,24 @@
 import { AppText } from '@/components/common/text';
 import { Badge } from '@/components/ui/badge';
 import { Images } from '@/configs';
-import Image from 'next/image';
 import Link from 'next/link';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { getPlaceholderImage } from '@/utils/images';
+import Image from 'next/image';
 
-export const BlogItem = () => {
+export default async function BlogItem() {
+  const imageWithPlaceholder = await getPlaceholderImage(Images.blog);
+
   return (
     <div className="border rounded-lg">
       <Link href="/" className="image">
         <Image
-          src={Images.blog}
+          src={imageWithPlaceholder.src}
           width={1280}
           height={720}
           alt=""
+          placeholder="blur"
+          blurDataURL={imageWithPlaceholder.placeholder}
           className="rounded-t-lg object-cover"
         />
       </Link>
@@ -46,4 +51,4 @@ export const BlogItem = () => {
       </div>
     </div>
   );
-};
+}
