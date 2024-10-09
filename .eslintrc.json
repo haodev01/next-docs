@@ -1,6 +1,6 @@
 {
   "extends": ["next/core-web-vitals", "next/typescript", "airbnb", "prettier"],
-  "plugins": ["prettier"],
+  "plugins": ["prettier", "check-file"],
   "env": {
     "node": true,
     "es2021": true,
@@ -38,6 +38,12 @@
     "react/jsx-one-expression-per-line": "off",
     "import/no-extraneous-dependencies": "off",
     "react/jsx-no-useless-fragment": "off",
-    "react/jsx-props-no-spreading": "off"
+    "react/jsx-props-no-spreading": "off",
+    "check-file/filename-naming-convention": [
+      "error",
+      {
+        "**/*.{ts,tsx}": "KEBAB_CASE"
+      }
+    ]
   }
 }
