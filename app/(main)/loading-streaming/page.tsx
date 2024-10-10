@@ -1,5 +1,5 @@
-import { DashboardCard, DashboardCardSkeleton } from '@/components/streaming';
 import { Suspense } from 'react';
+import { DashboardCard, DashboardCardSkeleton } from '../_components/streaming';
 
 export default function Page() {
   return (

@@ -4,6 +4,8 @@ import { Roboto } from 'next/font/google';
 import './globals.css';
 import StoreProvider from '@/app/store-provider';
 import { ThemeProvider } from '@/app/theme-provider';
+import { SessionProvider } from 'next-auth/react';
+import { Toaster } from '@/components/ui/toaster';
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -29,7 +31,10 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <StoreProvider>{children}</StoreProvider>
+          <Toaster />
+          <SessionProvider>
+            <StoreProvider>{children}</StoreProvider>
+          </SessionProvider>
         </ThemeProvider>
       </body>
     </html>

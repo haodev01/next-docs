@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { categoryApi } from '@/api';
-import { ProductList } from './_components/product-list';
-import { ProductListLoading } from './_components/product-list-loading';
+import { ProductList } from './_components/product/product-list';
+import { ProductListLoading } from './_components/product/product-list-loading';
 
 const getCategories = async () => {
   const ressponse = await categoryApi.list();

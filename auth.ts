@@ -5,11 +5,13 @@ import Credentials from 'next-auth/providers/credentials';
 import { jwtDecode } from 'jwt-decode';
 import { UserLoginForm } from './types';
 import { authApi } from './api';
+import { InvalidEmailPasswordError } from './utils/errors';
 
-interface User {
+interface IUser {
   id: string;
   name?: string;
   email: string;
+  error?: string;
 }
 export const { handlers, signIn, signOut, auth } = NextAuth({
   trustHost: true,
@@ -25,10 +27,19 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           .login(credentials as UserLoginForm)
           .then((res) => res)
           .catch(() => {});
+
+        if (!data)
+          return {
+            error: 'Invalid email or password',
+          };
+
         const decode = jwtDecode(data?.token as string);
         const user = await authApi
           .profile(decode.sub as string)
-          .then((res) => res);
+          .then((res) => res)
+          .catch(() => {
+            throw new InvalidEmailPasswordError();
+          });
         return {
           id: '1',
           name: user.name.firstname,
@@ -39,9 +50,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }),
   ],
   callbacks: {
+    async signIn({ user }) {
+      if (user?.error) throw new Error('custom error to the client');
+      return true;
+    },
     jwt: async ({ token, user }) => {
       const newToken = { ...token };
-      const newUser = { ...user } as User & { access_token: string };
+      const newUser = { ...user } as IUser & { access_token: string };
       if (user) {
         newToken.access_token = newUser.access_token;
         newToken.user = newUser;
@@ -72,8 +87,11 @@ declare module 'next-auth' {
    * Returned by `auth`, `useSession`, `getSession` and received as a prop on the `SessionProvider` React Context
    */
   interface Session {
-    user: User;
+    user: IUser;
     access_token: string;
+  }
+  interface User {
+    error?: string;
   }
 }
 declare module 'next-auth/jwt' {
@@ -81,6 +99,6 @@ declare module 'next-auth/jwt' {
   interface JWT {
     /** OpenID ID Token */
     access_token: string;
-    user: User;
+    user: IUser;
   }
 }

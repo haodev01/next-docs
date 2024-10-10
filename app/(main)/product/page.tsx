@@ -1,4 +1,4 @@
-import { ProductGrid } from '../_components/product-grid';
+import { ProductGrid } from '../_components/product/product-grid';
 
 export default function Page({
   searchParams,

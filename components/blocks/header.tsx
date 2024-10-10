@@ -1,14 +1,16 @@
+'use client';
+
 import { ToggleMode } from '@/components/common';
-import { User } from '@/types';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { useSession } from 'next-auth/react';
 import { UserDropdown } from './user-dropdown';
+import { Skeleton } from '../ui/skeleton';
 
-interface IHeaderProps {
-  user?: User;
-}
-export const Header = (props: IHeaderProps) => {
-  const { user } = props;
+export const Header = () => {
+  const session = useSession();
+  const isLoading = session.status === 'loading';
+  const user = session.data?.user;
   return (
     <header className="p-6 border-b">
       <div className="container mx-auto">
@@ -25,12 +27,16 @@ export const Header = (props: IHeaderProps) => {
                 Products
               </Link>
             </div>
-            {user?.id ? (
-              <UserDropdown />
-            ) : (
+            {!isLoading && user && <UserDropdown />}
+            {!isLoading && !user && (
               <Button asChild>
                 <Link href="/signin">Signin</Link>
               </Button>
+            )}
+            {isLoading && (
+              <div>
+                <Skeleton className="h-10 w-14" />
+              </div>
             )}
             <ToggleMode />
           </div>
